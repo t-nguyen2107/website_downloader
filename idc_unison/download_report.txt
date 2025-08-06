@@ -1,8 +1,0 @@
-Website Download Report
-======================
-
-Base URL: https://idc.unisonsteadfast.com
-Output Directory: F:\website_downloader\idc_unison
-Total Downloaded: 1
-Failed Downloads: 0
-
