@@ -3,6 +3,7 @@ downloaded_site/
 quick_start_test/
 quick_start_advanced/
 unison/
+idc_unison/
 
 # Python
 __pycache__/
