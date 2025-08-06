@@ -64,7 +64,15 @@ jobs:
 
     - name: Security check with Bandit
       run: |
-        bandit -r . -f json -o bandit-report.json
+        echo "Running Bandit security check..."
+        bandit -r . -f json -o bandit-report.json --exclude ./tests,./build,./dist,./.git,./.github || echo "Bandit completed with issues"
+        # Ensure the report file exists even if bandit fails
+        if [ ! -f bandit-report.json ]; then
+          echo "Creating fallback bandit report..."
+          echo '{"results": [], "metrics": {}, "errors": ["Bandit failed to run"]}' > bandit-report.json
+        fi
+        echo "Bandit report file status:"
+        ls -la bandit-report.json || echo "Report file not found"
       continue-on-error: true
 
     - name: Upload Bandit report

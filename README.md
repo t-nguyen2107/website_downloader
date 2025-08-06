@@ -2,8 +2,8 @@
 
 [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/website-downloader.svg)](https://github.com/yourusername/website-downloader/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/website-downloader.svg)](https://github.com/yourusername/website-downloader/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/t-nguyen2107/website-downloader.svg)](https://github.com/t-nguyen2107/website-downloader/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/t-nguyen2107/website-downloader.svg)](https://github.com/t-nguyen2107/website-downloader/stargazers)
 
 A comprehensive Python tool for downloading entire websites for offline browsing. This tool recursively crawls websites, downloads all pages and assets (HTML, CSS, JS, images), and converts internal links for seamless offline navigation.
 
@@ -311,7 +311,7 @@ Contributions are welcome! Here's how you can help:
 ### 🔧 Development Setup
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/yourusername/website-downloader.git`
+2. Clone your fork: `git clone https://github.com/t-nguyen2107/website-downloader.git`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Test your changes: `python quick_start.py`
 5. Submit a pull request
@@ -349,6 +349,6 @@ This tool is for educational and personal use only. Users are responsible for en
 
 **⭐ Star this repository if you find it helpful!**
 
-[Report Bug](https://github.com/yourusername/website-downloader/issues) • [Request Feature](https://github.com/yourusername/website-downloader/issues) • [Contribute](https://github.com/yourusername/website-downloader/pulls)
+[Report Bug](https://github.com/t-nguyen2107/website-downloader/issues) • [Request Feature](https://github.com/t-nguyen2107/website-downloader/issues) • [Contribute](https://github.com/t-nguyen2107/website-downloader/pulls)
 
 </div>
