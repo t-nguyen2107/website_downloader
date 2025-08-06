@@ -163,6 +163,15 @@ class WebsiteDownloader:
             self.failed_urls.add(url)
             return False
             
+    def is_valid_url_scheme(self, url):
+        """Check if URL has a valid scheme for downloading"""
+        if not url or url.startswith('#'):
+            return False
+        parsed = urlparse(url)
+        # Skip non-HTTP schemes like mailto:, tel:, email:, javascript:, etc.
+        invalid_schemes = {'mailto', 'tel', 'email', 'javascript', 'data', 'ftp', 'file', 'about', 'chrome'}
+        return parsed.scheme.lower() in {'http', 'https'} and parsed.scheme.lower() not in invalid_schemes
+    
     def extract_links(self, html_content, base_url):
         """Extract all links from HTML content"""
         soup = BeautifulSoup(html_content, 'html.parser')
@@ -183,15 +192,18 @@ class WebsiteDownloader:
         for tag, attr in selectors.items():
             for element in soup.find_all(tag, {attr: True}):
                 url = element[attr]
-                if url:
+                if url and self.is_valid_url_scheme(url):
                     absolute_url = urljoin(base_url, url)
-                    links.add(self.normalize_url(absolute_url))
+                    if self.is_valid_url_scheme(absolute_url):
+                        links.add(self.normalize_url(absolute_url))
                     
         # Extract CSS @import and url() references
         for style_tag in soup.find_all('style'):
             if style_tag.string:
                 css_urls = self.extract_css_urls(style_tag.string, base_url)
-                links.update(css_urls)
+                # Filter CSS URLs as well
+                filtered_css_urls = {url for url in css_urls if self.is_valid_url_scheme(url)}
+                links.update(filtered_css_urls)
                 
         return links
         
@@ -203,15 +215,19 @@ class WebsiteDownloader:
         url_pattern = r'url\(["\']?([^"\')]+)["\']?\)'
         for match in re.finditer(url_pattern, css_content):
             url = match.group(1)
-            absolute_url = urljoin(base_url, url)
-            urls.add(self.normalize_url(absolute_url))
+            if self.is_valid_url_scheme(url):
+                absolute_url = urljoin(base_url, url)
+                if self.is_valid_url_scheme(absolute_url):
+                    urls.add(self.normalize_url(absolute_url))
             
         # Find @import references
         import_pattern = r'@import\s+["\']([^"\')]+)["\']'
         for match in re.finditer(import_pattern, css_content):
             url = match.group(1)
-            absolute_url = urljoin(base_url, url)
-            urls.add(self.normalize_url(absolute_url))
+            if self.is_valid_url_scheme(url):
+                absolute_url = urljoin(base_url, url)
+                if self.is_valid_url_scheme(absolute_url):
+                    urls.add(self.normalize_url(absolute_url))
             
         return urls
         

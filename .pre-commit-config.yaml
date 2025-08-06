@@ -1,0 +1,101 @@
+# Pre-commit hooks configuration
+# Install with: pre-commit install
+# Run manually with: pre-commit run --all-files
+
+repos:
+  # Black - Python code formatter
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=88]
+
+  # isort - Import sorting
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile, black, --line-length, "88"]
+
+  # Flake8 - Linting
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-docstrings, flake8-bugbear]
+
+  # MyPy - Type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-requests, types-beautifulsoup4]
+        args: [--ignore-missing-imports]
+
+  # General pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Check for files that would conflict in case-insensitive filesystems
+      - id: check-case-conflict
+      # Check for files that contain merge conflict strings
+      - id: check-merge-conflict
+      # Check for debugger imports and py37+ breakpoint() calls
+      - id: debug-statements
+      # Check whether files parse as valid python
+      - id: check-ast
+      # Check for byte-order marker
+      - id: check-byte-order-marker
+      # Require literal syntax when initializing empty or zero Python builtin types
+      - id: check-builtin-literals
+      # Check for files that contain docstring that is not a string literal
+      - id: check-docstring-first
+      # Checks that non-binary executables have a proper shebang
+      - id: check-executables-have-shebangs
+      # Check for files that would conflict in case-insensitive filesystems
+      - id: check-case-conflict
+      # Check JSON files for parseable syntax
+      - id: check-json
+      # Check for files that contain merge conflict strings
+      - id: check-merge-conflict
+      # Check for symlinks which are changed from the repository to a file
+      - id: check-symlinks
+      # Check TOML files for parseable syntax
+      - id: check-toml
+      # Check YAML files for parseable syntax
+      - id: check-yaml
+      # Check for debugger imports and py37+ breakpoint() calls
+      - id: debug-statements
+      # Detects symlinks which are changed from the repository to a file
+      - id: destroyed-symlinks
+      # Makes sure files end in a newline and only a newline
+      - id: end-of-file-fixer
+        exclude: '^(downloaded_site|quick_start_test|quick_start_advanced|unison)/'
+      # Replaces or checks mixed line endings
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      # Trims trailing whitespace
+      - id: trailing-whitespace
+        exclude: '^(downloaded_site|quick_start_test|quick_start_advanced|unison)/'
+
+  # Security checks
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: [-r, ., -f, json, -o, bandit-report.json]
+        exclude: '^(tests|downloaded_site|quick_start_test|quick_start_advanced|unison)/'
+
+# Configuration
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
