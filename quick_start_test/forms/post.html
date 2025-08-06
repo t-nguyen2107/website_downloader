@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+<!-- Example form from HTML5 spec http://www.w3.org/TR/html5/forms.html#writing-a-form's-user-interface -->
+<form action="/post" method="post">
+<p><label>Customer name: <input name="custname"/></label></p>
+<p><label>Telephone: <input name="custtel" type="tel"/></label></p>
+<p><label>E-mail address: <input name="custemail" type="email"/></label></p>
+<fieldset>
+<legend> Pizza Size </legend>
+<p><label> <input name="size" type="radio" value="small"/> Small </label></p>
+<p><label> <input name="size" type="radio" value="medium"/> Medium </label></p>
+<p><label> <input name="size" type="radio" value="large"/> Large </label></p>
+</fieldset>
+<fieldset>
+<legend> Pizza Toppings </legend>
+<p><label> <input name="topping" type="checkbox" value="bacon"/> Bacon </label></p>
+<p><label> <input name="topping" type="checkbox" value="cheese"/> Extra Cheese </label></p>
+<p><label> <input name="topping" type="checkbox" value="onion"/> Onion </label></p>
+<p><label> <input name="topping" type="checkbox" value="mushroom"/> Mushroom </label></p>
+</fieldset>
+<p><label>Preferred delivery time: <input max="21:00" min="11:00" name="delivery" step="900" type="time"/></label></p>
+<p><label>Delivery instructions: <textarea name="comments"></textarea></label></p>
+<p><button>Submit order</button></p>
+</form>
+</body>
+</html>

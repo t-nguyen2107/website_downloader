@@ -1,0 +1,13 @@
+# Website Downloader Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+
+# Optional: For better performance and additional features
+# Uncomment if you want to use these features:
+# selenium>=4.0.0          # For JavaScript-heavy sites (requires browser driver)
+# aiohttp>=3.8.0           # For async downloading (future enhancement)
+# tqdm>=4.64.0             # For progress bars

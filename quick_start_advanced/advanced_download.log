@@ -1,0 +1,30 @@
+2025-08-06 11:22:45,148 - INFO - [MainThread] - Loaded robots.txt from https://httpbin.org/robots.txt
+2025-08-06 11:22:45,148 - INFO - [MainThread] - Starting download of https://httpbin.org
+2025-08-06 11:22:45,149 - INFO - [MainThread] - Output directory: F:\website_downloader\quick_start_advanced
+2025-08-06 11:22:45,149 - INFO - [MainThread] - Max workers: 2
+2025-08-06 11:22:45,149 - INFO - [ThreadPoolExecutor-0_0] - Processing: https://httpbin.org (depth: 0)
+2025-08-06 11:22:47,017 - INFO - [ThreadPoolExecutor-0_0] - Downloaded: https://httpbin.org -> quick_start_advanced\index.html
+2025-08-06 11:22:47,551 - INFO - [ThreadPoolExecutor-0_0] - Processing: mailto:me@kennethreitz.org (depth: 0)
+2025-08-06 11:22:47,552 - INFO - [ThreadPoolExecutor-0_1] - Processing: https://httpbin.org/forms/post (depth: 1)
+2025-08-06 11:22:47,559 - ERROR - [ThreadPoolExecutor-0_0] - Request failed for mailto:me@kennethreitz.org: No connection adapters were found for 'mailto:me@kennethreitz.org'
+2025-08-06 11:22:47,559 - WARNING - [ThreadPoolExecutor-0_0] - Attempt 1 failed for mailto:me@kennethreitz.org: No connection adapters were found for 'mailto:me@kennethreitz.org'. Retrying...
+2025-08-06 11:22:47,863 - INFO - [ThreadPoolExecutor-0_1] - Downloaded: https://httpbin.org/forms/post -> quick_start_advanced\forms\post.html
+2025-08-06 11:22:48,367 - INFO - [ThreadPoolExecutor-0_1] - Processing: https://httpbin.org/flasgger_static/swagger-ui.css (depth: 0)
+2025-08-06 11:22:48,561 - ERROR - [ThreadPoolExecutor-0_0] - Request failed for mailto:me@kennethreitz.org: No connection adapters were found for 'mailto:me@kennethreitz.org'
+2025-08-06 11:22:48,561 - WARNING - [ThreadPoolExecutor-0_0] - Attempt 2 failed for mailto:me@kennethreitz.org: No connection adapters were found for 'mailto:me@kennethreitz.org'. Retrying...
+2025-08-06 11:22:50,411 - INFO - [ThreadPoolExecutor-0_1] - Downloaded: https://httpbin.org/flasgger_static/swagger-ui.css -> quick_start_advanced\flasgger_static\swagger-ui.css
+2025-08-06 11:22:50,561 - ERROR - [ThreadPoolExecutor-0_0] - Request failed for mailto:me@kennethreitz.org: No connection adapters were found for 'mailto:me@kennethreitz.org'
+2025-08-06 11:22:50,561 - ERROR - [ThreadPoolExecutor-0_0] - Failed to download mailto:me@kennethreitz.org after 3 attempts: No connection adapters were found for 'mailto:me@kennethreitz.org'
+2025-08-06 11:22:50,925 - INFO - [ThreadPoolExecutor-0_1] - Processing: https://httpbin.org/flasgger_static/swagger-ui-standalone-preset.js (depth: 0)
+2025-08-06 11:22:51,867 - INFO - [ThreadPoolExecutor-0_1] - Downloaded: https://httpbin.org/flasgger_static/swagger-ui-standalone-preset.js -> quick_start_advanced\flasgger_static\swagger-ui-standalone-preset.js
+2025-08-06 11:22:52,367 - INFO - [ThreadPoolExecutor-0_0] - Processing: https://httpbin.org/flasgger_static/swagger-ui-bundle.js (depth: 0)
+2025-08-06 11:22:52,367 - INFO - [ThreadPoolExecutor-0_1] - Processing: https://httpbin.org/flasgger_static/lib/jquery.min.js (depth: 0)
+2025-08-06 11:22:53,040 - INFO - [ThreadPoolExecutor-0_0] - Downloaded: https://httpbin.org/flasgger_static/swagger-ui-bundle.js -> quick_start_advanced\flasgger_static\swagger-ui-bundle.js
+2025-08-06 11:22:53,541 - INFO - [ThreadPoolExecutor-0_0] - Processing: https://httpbin.org/static/favicon.ico (depth: 0)
+2025-08-06 11:22:53,846 - INFO - [ThreadPoolExecutor-0_0] - Downloaded: https://httpbin.org/static/favicon.ico -> quick_start_advanced\static\favicon.ico
+2025-08-06 11:22:54,220 - INFO - [ThreadPoolExecutor-0_1] - Downloaded: https://httpbin.org/flasgger_static/lib/jquery.min.js -> quick_start_advanced\flasgger_static\lib\jquery.min.js
+2025-08-06 11:22:54,720 - INFO - [MainThread] - Download completed. Downloaded 7 files.
+2025-08-06 11:22:54,720 - WARNING - [MainThread] - Failed to download 1 files.
+2025-08-06 11:22:54,720 - INFO - [MainThread] - Verifying download completeness...
+2025-08-06 11:22:54,725 - WARNING - [MainThread] - Broken links: 1
+2025-08-06 11:22:54,725 - WARNING - [MainThread] -   Broken link in quick_start_advanced\index.html: me@kennethreitz.org
