@@ -45,6 +45,7 @@ class AdvancedWebsiteDownloader:
         self.max_depth = config.get('max_depth', 10)
         self.max_workers = config.get('max_workers', 1)
         self.verify_ssl = config.get('verify_ssl', True)
+        self.ignore_robots = config.get('ignore_robots', False)
         
         # Asset type configuration
         self.asset_types = {
@@ -77,8 +78,12 @@ class AdvancedWebsiteDownloader:
         # Setup session
         self.setup_session()
         
-        # Check robots.txt
-        self.check_robots_txt()
+        # Check robots.txt (unless ignored)
+        if not self.ignore_robots:
+            self.check_robots_txt()
+        else:
+            self.robots_parser = None
+            self.logger.info("Ignoring robots.txt restrictions")
         
     def setup_logging(self):
         """Enhanced logging setup"""
@@ -148,6 +153,8 @@ class AdvancedWebsiteDownloader:
             
     def can_fetch(self, url):
         """Check if URL can be fetched according to robots.txt"""
+        if self.ignore_robots:
+            return True
         if self.robots_parser:
             return self.robots_parser.can_fetch('*', url)
         return True
@@ -688,6 +695,7 @@ def load_config(config_file=None, **kwargs):
         'verify_ssl': True,
         'include_subdomains': False,
         'force_redownload': False,
+        'ignore_robots': False,
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
     
@@ -736,6 +744,8 @@ Note: Please respect website terms of service and copyright laws.
                        help='Force re-download of existing files')
     parser.add_argument('--no-ssl-verify', action='store_true',
                        help='Disable SSL certificate verification')
+    parser.add_argument('--ignore-robots', action='store_true',
+                       help='Ignore robots.txt restrictions (use responsibly)')
     
     args = parser.parse_args()
     
@@ -755,7 +765,8 @@ Note: Please respect website terms of service and copyright laws.
             max_workers=args.workers,
             verify_ssl=not args.no_ssl_verify,
             include_subdomains=args.include_subdomains,
-            force_redownload=args.force_redownload
+            force_redownload=args.force_redownload,
+            ignore_robots=args.ignore_robots
         )
         
         # Create downloader and start

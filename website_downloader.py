@@ -37,12 +37,13 @@ from urllib.parse import urljoin, urlparse, unquote
 
 
 class WebsiteDownloader:
-    def __init__(self, base_url, output_dir="downloaded_site", delay=1.0, max_depth=10):
+    def __init__(self, base_url, output_dir="downloaded_site", delay=1.0, max_depth=10, ignore_robots=False):
         self.base_url = base_url.rstrip('/')
         self.domain = urlparse(base_url).netloc
         self.output_dir = Path(output_dir)
         self.delay = delay
         self.max_depth = max_depth
+        self.ignore_robots = ignore_robots
         
         # Track downloaded URLs and failed downloads
         self.downloaded_urls = set()
@@ -61,8 +62,12 @@ class WebsiteDownloader:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         })
         
-        # Check robots.txt
-        self.check_robots_txt()
+        # Check robots.txt (unless ignored)
+        if not self.ignore_robots:
+            self.check_robots_txt()
+        else:
+            self.robots_parser = None
+            self.logger.info("Ignoring robots.txt restrictions")
         
     def setup_logging(self):
         """Setup logging configuration"""
@@ -92,6 +97,8 @@ class WebsiteDownloader:
             
     def can_fetch(self, url):
         """Check if URL can be fetched according to robots.txt"""
+        if self.ignore_robots:
+            return True
         if self.robots_parser:
             return self.robots_parser.can_fetch('*', url)
         return True
@@ -255,7 +262,7 @@ class WebsiteDownloader:
             if current_url in self.downloaded_urls or depth > self.max_depth:
                 continue
                 
-            # Skip if not allowed by robots.txt
+            # Skip if not allowed by robots.txt (unless ignored)
             if not self.can_fetch(current_url):
                 self.logger.warning(f"Robots.txt disallows: {current_url}")
                 continue
@@ -369,6 +376,8 @@ Note: Please respect website terms of service and copyright laws.
                        help='Delay between requests in seconds (default: 1.0)')
     parser.add_argument('--max-depth', '-m', type=int, default=10,
                        help='Maximum crawling depth (default: 10)')
+    parser.add_argument('--ignore-robots', action='store_true',
+                       help='Ignore robots.txt restrictions (use responsibly)')
     
     args = parser.parse_args()
     
@@ -382,7 +391,8 @@ Note: Please respect website terms of service and copyright laws.
             base_url=args.url,
             output_dir=args.output,
             delay=args.delay,
-            max_depth=args.max_depth
+            max_depth=args.max_depth,
+            ignore_robots=args.ignore_robots
         )
         
         downloader.download_website()

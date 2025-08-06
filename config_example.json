@@ -4,8 +4,9 @@
   "max_workers": 2,
   "verify_ssl": true,
   "include_subdomains": false,
-  "force_redownload": false,
-  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "force_redownload": false,
+    "ignore_robots": false,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
   "_comment": "Configuration file for advanced website downloader",
   "_usage": "python advanced_downloader.py https://example.com --config config_example.json"
 }
